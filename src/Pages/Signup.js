@@ -1,41 +1,24 @@
 import React, { useContext, useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../AuthProvider/AuthProvider';
-import { BsGoogle } from 'react-icons/bs';
 
-const Login = () => {
+const Signup = () => {
     const navigate = useNavigate();
     const [error, setError] = useState('');
-    const { login, googleLogin, githubLogin } = useContext(AuthContext);
-    const location = useLocation();
-    const from = location.state?.from?.pathname || '/'
+    const { singUpWithEmailPassword } = useContext(AuthContext);
 
-
-    const HandleGoogleSignIn = () => {
-        googleLogin()
-            .then((result) => {
-                setError('');
-                navigate(from, { replace: true })
-            })
-            .catch((error) => {
-                const errorMessage = error.message;
-                setError(errorMessage)
-            })
-    }
-
-    const handleLoginSubmit = (event) => {
+    const handleEmailPasswordSignUp = (event) => {
         event.preventDefault();
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
 
-        console.log(email, password)
-
-        login(email, password)
+        singUpWithEmailPassword(email, password)
             .then((result) => {
+                const user = result.user;
                 form.reset();
                 setError('');
-                navigate(from, { replace: true })
+                navigate('/');
             })
             .catch((error) => {
                 const errorMessage = error.message;
@@ -45,13 +28,18 @@ const Login = () => {
     return (
         <div className="hero min-h-screen w-3/4 mx-auto">
             <div className="hero-content flex-col lg:flex-row">
-                <div className="text-center flex flex-col lg:text-left">
-                    <h1 className="text-5xl font-bold text-center my-10">Login now!</h1>
+                <div className="text-center lg:text-left">
+                    <h1 className="text-5xl font-bold text-center my-10">SignUp now!</h1>
                     <img className='w-2/4 mx-auto' src="https://cdn-icons-png.flaticon.com/512/1042/1042390.png" alt="" />
                 </div>
                 <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-                    <button onClick={HandleGoogleSignIn} className="btn w-3/4 mx-auto mt-8"><BsGoogle className='mr-2'></BsGoogle> Log in With Google</button>
-                    <form onSubmit={handleLoginSubmit} className="card-body">
+                    <form onSubmit={handleEmailPasswordSignUp} className="card-body">
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Name</span>
+                            </label>
+                            <input type="name" name="name" placeholder="name" className="input input-bordered" required />
+                        </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Email</span>
@@ -63,10 +51,10 @@ const Login = () => {
                                 <span className="label-text">Password</span>
                             </label>
                             <input type="password" name="password" placeholder="password" className="input input-bordered" required />
-                            <p className="mt-5 ">Don't have an account? <Link className=' link link-hover' to='/signup'>Register</Link> </p>
+                            <p className="mt-5 ">Already have an account? <Link className=' link link-hover' to='/login'>Login</Link> </p>
                         </div>
                         <div className="form-control mt-6">
-                            <button type='submit' className="btn btn-primary">Login</button>
+                            <button className="btn btn-primary">SignUp</button>
                         </div>
                     </form>
                 </div>
@@ -75,4 +63,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default Signup;

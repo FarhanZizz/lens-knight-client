@@ -1,8 +1,10 @@
-import logo from './logo.svg';
+
 import './App.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import MainLayout from './Components/MainLayout';
 import Home from './Pages/Home';
+import Login from './Pages/Login';
+import Signup from './Pages/Signup';
 
 function App() {
 
@@ -14,6 +16,14 @@ function App() {
         {
           path: '/',
           element: <Home></Home>
+        },
+        {
+          path: '/login',
+          element: <Login></Login>
+        },
+        {
+          path: '/signup',
+          element: <Signup></Signup>
         }
       ]
     }
