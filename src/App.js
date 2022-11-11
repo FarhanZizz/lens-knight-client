@@ -7,6 +7,9 @@ import Login from './Pages/Login';
 import Signup from './Pages/Signup';
 import Services from './Pages/Services';
 import ServiceDetails from './Pages/ServiceDetails';
+import MyReviews from './Pages/MyReviews';
+import PrivateRoute from './Components/PrivateRoute';
+import AddService from './Pages/AddService';
 
 function App() {
 
@@ -40,7 +43,19 @@ function App() {
             return fetch(`http://localhost:5000/service/${params.id}`)
           },
           element: <ServiceDetails></ServiceDetails>
-        }
+        },
+        {
+          path: '/myreviews',
+          element: <PrivateRoute><MyReviews></MyReviews></PrivateRoute>,
+        },
+        {
+          path: '/addservice',
+          element: <PrivateRoute><AddService></AddService></PrivateRoute>,
+        },
+        {
+          path: '/blog',
+          element: ,
+        },
       ]
     }
   ])

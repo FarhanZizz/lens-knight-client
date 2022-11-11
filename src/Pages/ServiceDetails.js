@@ -8,13 +8,41 @@ const ServiceDetails = () => {
     const { user } = useContext(AuthContext);
 
     const [reviews, setReviews] = useState([])
-    console.log(reviews)
 
     useEffect(() => {
         fetch(`http://localhost:5000/reviews/${reviewid}`)
             .then(res => res.json())
             .then(data => setReviews(data))
     }, [])
+    const handleReviewSubmit = event => {
+        event.preventDefault();
+        const form = event.target;
+        const name = form.name.value;
+        const img = form.image.value;
+        const review = form.review.value;
+
+        const newReview = {
+            reviewid,
+            name,
+            img,
+            review,
+            email: user.email,
+            serviceid: _id,
+        }
+
+        fetch(`http://localhost:5000/reviews/${reviewid}`, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(newReview)
+        })
+            .then(res => res.json())
+            .then(data => console.log(data))
+
+        const newReviewList = [...reviews, newReview];
+        setReviews(newReviewList)
+    }
     return (
         <div>
             <div className="hero my-10">
@@ -29,26 +57,26 @@ const ServiceDetails = () => {
                 </div>
             </div>
             <h1 className="text-3xl text-center font-bold">Our reviews</h1>
-            <div className='grid lg:grid-cols-3 justify-center my-10'>
+            <div className='grid gap-y-10 lg:grid-cols-3 justify-center my-10'>
                 {
-                    reviews.map(review => <ReviewCard details={review} key={review.id}></ReviewCard>)
+                    reviews.map(review => <ReviewCard details={review} key={review._id}></ReviewCard>)
                 }
             </div>
             <h1 className="text-2xl text-center font-semibold">Add your own review</h1>
             {
                 user?.uid ?
-                    <form className="card-body w-1/2 mx-auto">
+                    <form onSubmit={handleReviewSubmit} className="card-body w-1/2 mx-auto">
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Your Name</span>
                             </label>
-                            <input type="text" name="name" placeholder="Your Name" className="input input-bordered" required />
+                            <input type="text" name="name" defaultValue={user.displayName} placeholder="Your Name" className="input input-bordered" required />
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Your Image</span>
                             </label>
-                            <input type="text" name="image" placeholder="Photo URL" className="input input-bordered" required />
+                            <input type="text" name="image" defaultValue={user?.photoURL} placeholder="Photo URL" className="input input-bordered" required />
                         </div>
                         <div className="form-control">
                             <label className="label">

@@ -6,7 +6,7 @@ import { BsGoogle } from 'react-icons/bs';
 const Login = () => {
     const navigate = useNavigate();
     const [error, setError] = useState('');
-    const { login, googleLogin, githubLogin } = useContext(AuthContext);
+    const { login, googleLogin } = useContext(AuthContext);
     const location = useLocation();
     const from = location.state?.from?.pathname || '/'
 
