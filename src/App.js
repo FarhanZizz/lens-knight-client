@@ -10,6 +10,7 @@ import ServiceDetails from './Pages/ServiceDetails';
 import MyReviews from './Pages/MyReviews';
 import PrivateRoute from './Components/PrivateRoute';
 import AddService from './Pages/AddService';
+import Blog from './Pages/Blog';
 
 function App() {
 
@@ -54,7 +55,7 @@ function App() {
         },
         {
           path: '/blog',
-          element: ,
+          element: <Blog></Blog>,
         },
       ]
     }
