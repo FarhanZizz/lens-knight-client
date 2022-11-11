@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
     return (
@@ -10,7 +11,7 @@ const Navbar = () => {
                     </label>
                     <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                         <li><a>Services</a></li>
-                        <li><a>Login</a></li>
+                        <li><Link to='/login'>Login</Link></li>
                         <li><a>SignUp</a></li>
                     </ul>
                 </div>
