@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../AuthProvider/AuthProvider';
 
 const Navbar = () => {
+    const { user, logOut } = useContext(AuthContext);
+    const HandleLogOut = () => {
+        logOut()
+            .then(() => { })
+            .catch(() => { })
+    }
     return (
         <div className="navbar bg-base-100">
             <div className="navbar-start">
@@ -11,8 +18,20 @@ const Navbar = () => {
                     </label>
                     <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                         <li><Link to='/services'>Services</Link></li>
-                        <li><Link to='/login'>Login</Link></li>
-                        <li><Link to='/signup'>SignUp</Link></li>
+                        {
+                            user?.uid ?
+                                <>
+                                    <li><button onClick={HandleLogOut}>Logout</button></li>
+                                    <li><Link to='/myreviews'>My Reviews</Link></li>
+                                </>
+                                :
+                                <>
+                                    <li><Link to='/login'>Login</Link></li>
+                                    <li><Link to='/signup'>SignUp</Link></li>
+                                </>
+                        }
+
+
                     </ul>
                 </div>
                 <Link to='/' className="btn btn-ghost normal-case text-xl">Lens Knight</Link>
@@ -20,8 +39,18 @@ const Navbar = () => {
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal p-0">
                     <li><Link to='/services'>Services</Link></li>
-                    <li><Link to='/login'>Login</Link></li>
-                    <li><Link to='/signup'>SignUp</Link></li>
+                    {
+                        user?.uid ?
+                            <>
+                                <li><button onClick={HandleLogOut}>Logout</button></li>
+                                <li><Link to='/myreviews'>My Reviews</Link></li>
+                            </>
+                            :
+                            <>
+                                <li><Link to='/login'>Login</Link></li>
+                                <li><Link to='/signup'>SignUp</Link></li>
+                            </>
+                    }
                 </ul>
             </div>
             <div className="navbar-end">
