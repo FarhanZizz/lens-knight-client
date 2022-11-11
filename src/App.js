@@ -5,6 +5,7 @@ import MainLayout from './Components/MainLayout';
 import Home from './Pages/Home';
 import Login from './Pages/Login';
 import Signup from './Pages/Signup';
+import Services from './Pages/Services';
 
 function App() {
 
@@ -24,6 +25,10 @@ function App() {
         {
           path: '/signup',
           element: <Signup></Signup>
+        },
+        {
+          path: '/services',
+          element: <Services></Services>
         }
       ]
     }

@@ -1,14 +1,17 @@
 import React from 'react';
 import Banner from '../Components/Banner';
 import Gallery from '../Components/Gallery';
-import Services from '../Components/Services';
+import Newsletter from '../Components/Newsletter';
+import ServicePreview from '../Components/ServicePreview';
+import Services from './Services';
 
 const Home = () => {
     return (
         <>
             <Banner></Banner>
-            <Services></Services>
+            <ServicePreview></ServicePreview>
             <Gallery></Gallery>
+            <Newsletter></Newsletter>
         </>
     );
 };
