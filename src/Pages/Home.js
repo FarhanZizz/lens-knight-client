@@ -3,7 +3,6 @@ import Banner from '../Components/Banner';
 import Gallery from '../Components/Gallery';
 import Newsletter from '../Components/Newsletter';
 import ServicePreview from '../Components/ServicePreview';
-import Services from './Services';
 
 const Home = () => {
     return (
