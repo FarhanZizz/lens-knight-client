@@ -35,7 +35,6 @@ const ServiceDetails = () => {
             email: user.email,
             serviceid: _id,
         }
-        const newReviewList = [...reviews, newReview];
         fetch(`https://lens-knight-server.vercel.app/reviews/${reviewid}`, {
             method: 'POST',
             headers: {
@@ -45,8 +44,14 @@ const ServiceDetails = () => {
         })
             .then(res => res.json())
             .then(data => {
-                toast.success('Review Added Successfully')
-                refetch()
+                console.log(data);
+                if (data.acknowledged) {
+                    toast.success('Review Added Successfully')
+                    refetch()
+                }
+                else {
+                    toast.error(data.message);
+                }
             })
 
     }
