@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
-import { toast, Toaster } from 'react-hot-toast';
+import { toast } from 'react-hot-toast';
 import { useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../AuthProvider/AuthProvider';
 import ReviewCard from '../Components/ReviewCard';
@@ -12,7 +12,7 @@ const ServiceDetails = () => {
     const { data: reviews = [], refetch } = useQuery({
         queryKey: ['reviews'],
         queryFn: async () => {
-            const res = await fetch(`https://lens-knight-server.vercel.app/reviews/${reviewid}`);
+            const res = await fetch(`http://localhost:5000/reviews/${reviewid}`);
             const data = await res.json();
             return data
         }
@@ -24,9 +24,6 @@ const ServiceDetails = () => {
         const img = form.image.value;
         const review = form.review.value;
 
-        document.getElementById('review-modal').checked = false;
-
-
         const newReview = {
             reviewid,
             name,
@@ -35,7 +32,7 @@ const ServiceDetails = () => {
             email: user.email,
             serviceid: _id,
         }
-        fetch(`https://lens-knight-server.vercel.app/reviews/${reviewid}`, {
+        fetch('http://localhost:5000/reviews/new', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -46,8 +43,9 @@ const ServiceDetails = () => {
             .then(data => {
                 console.log(data);
                 if (data.acknowledged) {
-                    toast.success('Review Added Successfully')
                     refetch()
+                    toast.success('Review Added Successfully')
+                    document.getElementById('review-modal').checked = false;
                 }
                 else {
                     toast.error(data.message);
@@ -92,7 +90,7 @@ const ServiceDetails = () => {
                             <label className="label">
                                 <span className="label-text">Your Image</span>
                             </label>
-                            <input type="text" readOnly name="image" defaultValue={user.photoURL ? user.photoURL : "https://cdn-icons-png.flaticon.com/512/552/552721.png"} placeholder="Photo URL" className="input input-bordered" required />
+                            <input type="text" readOnly name="image" defaultValue={user?.photoURL ? user.photoURL : "https://cdn-icons-png.flaticon.com/512/552/552721.png"} placeholder="Photo URL" className="input input-bordered" required />
                         </div>
                         <div className="form-control">
                             <label className="label">
@@ -106,7 +104,6 @@ const ServiceDetails = () => {
                     </form>
                 </div>
             </div>
-            <Toaster />
         </div>
     );
 };

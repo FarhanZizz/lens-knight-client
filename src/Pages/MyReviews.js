@@ -1,34 +1,25 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import React, { useContext } from 'react';
 import { AuthContext } from '../AuthProvider/AuthProvider';
 import ReviewTableRow from '../Components/ReviewTableRow';
 
 const MyReviews = () => {
     const { user } = useContext(AuthContext);
-    const [userReviews, setUserReviews] = useState([]);
-    useEffect(() => {
-
-
-        fetch(`https://lens-knight-server.vercel.app/myreviews?email=${user.email}`)
-            .then(res => res.json())
-            .then(data => setUserReviews(data))
-    }, [])
+    const { data: userReviews = [], refetch } = useQuery({
+        queryKey: ['userReviews'],
+        queryFn: async () => {
+            const res = await fetch(`http://localhost:5000/reviews?email=${user.email}`);
+            const data = await res.json();
+            return data
+        }
+    });
     return (
-        <div className="overflow-x-auto">
-            <table className="table w-full">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>Service Name</th>
-                        <th>Review</th>
+        <div className="p-6 grid gap-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center justify-center">
 
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        userReviews.map(userReview => <ReviewTableRow userReview={userReview} key={userReview._id}></ReviewTableRow>)
-                    }
-                </tbody>
-            </table>
+            {
+                userReviews.map(userReview => <ReviewTableRow refetch={refetch} userReview={userReview} key={userReview._id}></ReviewTableRow>)
+            }
+
         </div>
     );
 };

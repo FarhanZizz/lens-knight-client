@@ -9,8 +9,9 @@ import Services from './Pages/Services';
 import ServiceDetails from './Pages/ServiceDetails';
 import MyReviews from './Pages/MyReviews';
 import PrivateRoute from './Components/PrivateRoute';
-import AddService from './Pages/AddService';
+
 import Blog from './Pages/Blog';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
 
@@ -34,24 +35,20 @@ function App() {
         {
           path: '/services',
           loader: () => {
-            return fetch('https://lens-knight-server.vercel.app/services')
+            return fetch('http://localhost:5000/services')
           },
           element: <Services></Services>,
         },
         {
           path: '/service/:id',
           loader: ({ params }) => {
-            return fetch(`https://lens-knight-server.vercel.app/service/${params.id}`)
+            return fetch(`http://localhost:5000/service/${params.id}`)
           },
           element: <ServiceDetails></ServiceDetails>
         },
         {
           path: '/myreviews',
           element: <PrivateRoute><MyReviews></MyReviews></PrivateRoute>,
-        },
-        {
-          path: '/addservice',
-          element: <PrivateRoute><AddService></AddService></PrivateRoute>,
         },
         {
           path: '/blog',
@@ -63,6 +60,7 @@ function App() {
   return (
     <div className=''>
       <RouterProvider router={router}></RouterProvider>
+      <Toaster></Toaster>
     </div>
   );
 }

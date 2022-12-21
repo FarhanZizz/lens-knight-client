@@ -23,7 +23,7 @@ const Navbar = () => {
                                 <>
                                     <li><button onClick={HandleLogOut}>Logout</button></li>
                                     <li><Link to='/myreviews'>My Reviews</Link></li>
-                                    <li><Link to='/addservice'>Add Service</Link></li>
+
                                 </>
                                 :
                                 <>
@@ -43,7 +43,7 @@ const Navbar = () => {
                     {
                         user?.uid ?
                             <>
-                                <li><Link to='/addservice'>Add Service</Link></li>
+
                                 <li><Link to='/myreviews'>My Reviews</Link></li>
                                 <li><button onClick={HandleLogOut}>Logout</button></li>
                             </>
