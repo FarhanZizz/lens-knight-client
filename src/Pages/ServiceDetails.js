@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { toast, Toaster } from 'react-hot-toast';
-import { Link, useLoaderData } from 'react-router-dom';
+import { useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../AuthProvider/AuthProvider';
 import ReviewCard from '../Components/ReviewCard';
 
@@ -9,7 +9,7 @@ const ServiceDetails = () => {
     const { _id, reviewid, title, price, description, img } = useLoaderData();;
     const { user } = useContext(AuthContext);
 
-    const { data: reviews = [], refetch, isLoading } = useQuery({
+    const { data: reviews = [], refetch } = useQuery({
         queryKey: ['reviews'],
         queryFn: async () => {
             const res = await fetch(`https://lens-knight-server.vercel.app/reviews/${reviewid}`);
