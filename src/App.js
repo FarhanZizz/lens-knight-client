@@ -34,14 +34,14 @@ function App() {
         {
           path: '/services',
           loader: () => {
-            return fetch('http://localhost:5000/services')
+            return fetch('https://lens-knight-server.vercel.app/services')
           },
           element: <Services></Services>,
         },
         {
           path: '/service/:id',
           loader: ({ params }) => {
-            return fetch(`http://localhost:5000/service/${params.id}`)
+            return fetch(`https://lens-knight-server.vercel.app/service/${params.id}`)
           },
           element: <ServiceDetails></ServiceDetails>
         },
@@ -61,7 +61,7 @@ function App() {
     }
   ])
   return (
-    <div>
+    <div className=''>
       <RouterProvider router={router}></RouterProvider>
     </div>
   );

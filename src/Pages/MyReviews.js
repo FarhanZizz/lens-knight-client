@@ -8,7 +8,7 @@ const MyReviews = () => {
     useEffect(() => {
 
 
-        fetch(`http://localhost:5000/myreviews?email=${user.email}`)
+        fetch(`https://lens-knight-server.vercel.app/myreviews?email=${user.email}`)
             .then(res => res.json())
             .then(data => setUserReviews(data))
     }, [])

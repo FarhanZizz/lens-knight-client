@@ -6,7 +6,7 @@ const ReviewTableRow = ({ userReview }) => {
 
     useEffect(() => {
 
-        fetch(`http://localhost:5000/service/${serviceid}`)
+        fetch(`https://lens-knight-server.vercel.app/service/${serviceid}`)
             .then(res => res.json())
             .then(data => setService(data))
     }, [])
