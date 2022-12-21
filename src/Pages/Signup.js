@@ -5,17 +5,25 @@ import { AuthContext } from '../AuthProvider/AuthProvider';
 const Signup = () => {
     const navigate = useNavigate();
     const [error, setError] = useState('');
-    const { singUpWithEmailPassword } = useContext(AuthContext);
+    const { singUpWithEmailPassword, updateUser } = useContext(AuthContext);
 
     const handleEmailPasswordSignUp = (event) => {
         event.preventDefault();
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
+        const name = form.name.value;
 
         singUpWithEmailPassword(email, password)
             .then((result) => {
-                const user = result.user;
+                const userInfo = {
+                    displayName: name,
+                }
+                updateUser(userInfo)
+                    .then(() => { })
+                    .catch(err => {
+                        console.log(err)
+                    })
                 form.reset();
                 setError('');
                 navigate('/');
@@ -52,6 +60,7 @@ const Signup = () => {
                             </label>
                             <input type="password" name="password" placeholder="password" className="input input-bordered" required />
                             <p className="mt-5 ">Already have an account? <Link className=' link link-hover' to='/login'>Login</Link> </p>
+                            <p className="text-red-600">{error}</p>
                         </div>
                         <div className="form-control mt-6">
                             <button className="btn btn-primary">SignUp</button>
