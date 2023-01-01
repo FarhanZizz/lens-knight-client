@@ -7,7 +7,7 @@ This website was built using the following technologies:
 - **React Query**: a library for fetching, caching, and updating data in a React app
 - **Firebase**: A cloud-based platform for secure authentication system and Hosting
 - **MongoDB**: a document-oriented database
-- **Express.js**: a web framework for Node.js
+- **Express.js**:  a minimal and flexible Node.js web application framework
 - **Tailwind CSS**: a utility-first CSS framework
 - **DaisyUI**: a user interface library for React
 - **React Hot Toast**: a library for displaying toasts in a React app
