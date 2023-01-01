@@ -5,7 +5,7 @@ This website was built using the following technologies:
 - **React**: a JavaScript library for building user interfaces
 - **React Router**: a library for managing routing in a React app
 - **React Query**: a library for fetching, caching, and updating data in a React app
-- **Firebase**: a platform for developing web and mobile applications that provides serverless backend services
+- **Firebase**: A cloud-based platform for secure authentication system and Hosting
 - **MongoDB**: a document-oriented database
 - **Express.js**: a web framework for Node.js
 - **Tailwind CSS**: a utility-first CSS framework
