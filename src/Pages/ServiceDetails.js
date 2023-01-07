@@ -12,7 +12,7 @@ const ServiceDetails = () => {
     const { data: reviews = [], refetch } = useQuery({
         queryKey: ['reviews'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/reviews/${reviewid}`);
+            const res = await fetch(`https://lens-knight-server.vercel.app/reviews/${reviewid}`);
             const data = await res.json();
             return data
         }
@@ -32,7 +32,7 @@ const ServiceDetails = () => {
             email: user.email,
             serviceid: _id,
         }
-        fetch('http://localhost:5000/reviews/new', {
+        fetch('https://lens-knight-server.vercel.app/reviews/new', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

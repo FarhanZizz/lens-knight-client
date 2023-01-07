@@ -8,13 +8,13 @@ const ReviewTableRow = ({ userReview, refetch }) => {
 
     const [service, setService] = useState([])
     useEffect(() => {
-        fetch(`http://localhost:5000/services/${serviceid}`)
+        fetch(`https://lens-knight-server.vercel.app/services/${serviceid}`)
             .then(res => res.json())
             .then(data => setService(data))
     }, [serviceid])
 
     const handleDelete = (id) => {
-        fetch(`http://localhost:5000/review/delete/${id}`, { method: 'DELETE' })
+        fetch(`https://lens-knight-server.vercel.app/review/delete/${id}`, { method: 'DELETE' })
             .then(res => res.json())
             .then(data => {
                 if (data.deletedCount === 1) {
